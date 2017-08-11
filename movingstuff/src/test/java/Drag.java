@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import org.openqa.selenium.support.FindBy;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 public class Drag {
@@ -17,6 +18,9 @@ public class Drag {
     @FindBy(xpath ="//*[@id=\"droppableview\"]")
     private WebElement target;
 
+    @FindBy(xpath="//*[@id=\"dragevent\"]/p")
+    private WebElement fun;
+
 
     public void drg(WebDriver w){
         Actions a = new Actions(w);
@@ -27,6 +31,17 @@ public class Drag {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+    }
+
+    public void fn(Actions a){
+        int x= ThreadLocalRandom.current().nextInt(-2, 2+1);
+        int y = ThreadLocalRandom.current().nextInt(-2, 2+1);
+        //x=x*10;
+        Action b = a.moveToElement(fun).clickAndHold().moveByOffset(x,y).build();
+        b.perform();
+
 
 
     }

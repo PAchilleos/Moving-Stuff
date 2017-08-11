@@ -24,6 +24,11 @@ public class SRT {
         Actions a = new Actions(w);
         Action b = a.moveToElement(s).clickAndHold().moveToElement(e).release().build();
         b.perform();
+        try {
+            TimeUnit.MILLISECONDS.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

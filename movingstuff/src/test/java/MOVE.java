@@ -8,10 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 public class MOVE {
     private WebDriver wd;
@@ -104,6 +107,84 @@ public class MOVE {
 
     }
 
+    @Test
+    public void test4() {
+        int i =0;
+
+
+
+        Drag d = PageFactory.initElements(wd, Drag.class);
+        ScreenShot S = new ScreenShot();
+        Actions a = new Actions(wd);
+        FW fl = new FW();
+        fl.wt(wd, 30, 5);
+        wd.navigate().to("http://demoqa.com/");
+        fl.xpathcon(wd, "//*[@id=\"menu-item-140\"]/a");
+        wd.findElement(By.xpath("//*[@id=\"menu-item-140\"]/a")).click();
+        fl.xpathcon(wd, "//*[@id=\"ui-id-4\"]");
+        wd.findElement(By.xpath("//*[@id=\"ui-id-4\"]")).click();
+        fl.xpathcon(wd, "//*[@id=\"dragevent\"]/p");
+
+
+
+
+
+        while (i < 1000) {
+           d.fn(a);
+           i++;//
+        }
+        a.release().perform();
+
+        //System.out.println(wd.findElement(By.xpath("//*[@id=\"tabs-1\"]/div")).getLocation().getY());
+    }
+
+    @Test
+    public void test5() {
+        int i =0;
+
+
+
+        PNT p = PageFactory.initElements(wd, PNT.class);
+        ScreenShot S = new ScreenShot();
+        Actions a = new Actions(wd);
+        FW fl = new FW();
+        fl.wt(wd, 30, 5);
+        wd.navigate().to("https://galactic.ink/sketchpad/");
+        fl.xpathcon(wd, "//*[@id=\"tools\"]/div/div[5]/div/div[1]/div[7]");
+        p.brsh(a);
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        p.sld(a);
+        fl.xpathcon(wd, "//*[@id=\"ctx_marquee\"]");
+
+        p.crtin(a);
+
+       while (i<750){
+            int x= ThreadLocalRandom.current().nextInt(-300, 300+1);
+            int y = ThreadLocalRandom.current().nextInt(-200, 200+1);
+            p.crt(a,x,y);
+            i++;
+        }
+        a.release().build().perform();
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+
+    }
 
 
     @After
